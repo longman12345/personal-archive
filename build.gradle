@@ -1,0 +1,47 @@
+group 'lewis'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {url "http://maven.aliyun.com/nexus/content/groups/public/"}
+    mavenCentral()
+}
+
+List springframework = [
+        "org.springframework:spring-context:4.3.3.RELEASE",
+        "org.springframework:spring-web:4.3.3.RELEASE",
+        "org.springframework:spring-webmvc:4.3.3.RELEASE",
+        "org.springframework:spring-jdbc:4.3.3.RELEASE",
+        "org.springframework:spring-test:4.3.3.RELEASE"
+]
+
+List db = [
+        "mysql:mysql-connector-java:5.1.8",
+        "org.mybatis:mybatis:3.4.1",
+        "org.mybatis:mybatis-spring:1.3.0",
+        "org.mybatis.generator:mybatis-generator-core:1.3.5",
+        "com.alibaba:druid:1.0.26"
+]
+
+List servlet = [
+    "javax.servlet:javax.servlet-api:3.1.0"
+]
+
+List Logger = [
+        "org.apache.logging.log4j:log4j-api:2.7",
+        "org.apache.logging.log4j:log4j-core:2.7"
+]
+
+dependencies {
+    compile springframework, servlet, Logger, db
+    testCompile "junit:junit:4.11"
+}
+
+task copyJars(type: Copy) {
+    from configurations.runtime
+    into 'lib' // 目标位置
+}

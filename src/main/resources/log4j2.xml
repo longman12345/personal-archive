@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60" status="info">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %c{1}(%F:%L) - %m%n" />
+        </Console>
+
+        <RollingFile name="fixedTimeFileAppender" fileName="personal-archive.log"
+                     filePattern="personal-archive.log.%d{yyyy-MM-dd_HH}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %c{1}(%F:%L) - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="200 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="appMonitorFixedTimeFileAppender"
+                     fileName="personal-archive-appmonitor.log" filePattern="personal-archive-appmonitor.log.%d{yyyy-MM-dd_HH}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %c{1}(%F:%L) - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="200 MB" />
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <!--<AsyncLogger name="lewis.personal.archive" level="debug"
+                     additivity="false" includeLocation="true">
+            <AppenderRef ref="fixedTimeFileAppender" />
+            <AppenderRef ref="console" />
+        </AsyncLogger>
+
+        <AsyncLogger name="org.springframework" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="fixedTimeFileAppender"/>
+            <AppenderRef ref="console" />
+        </AsyncLogger>
+
+        <AsyncLogger name="appMonitor" level="debug" additivity="false"
+                     includeLocation="true">
+            <AppenderRef ref="appMonitorFixedTimeFileAppender" />
+            <AppenderRef ref="console" />
+        </AsyncLogger>-->
+
+        <Root level="info" includeLocation="true">
+            <AppenderRef ref="fixedTimeFileAppender" />
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
